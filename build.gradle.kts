@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.lumen"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 
 java {
 	toolchain {
@@ -25,6 +25,8 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.json:json:20250107")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")

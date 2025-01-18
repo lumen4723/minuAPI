@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### Important ###
-src/main/java/com/lumen/minuAPI/Config/
+application-*.properties

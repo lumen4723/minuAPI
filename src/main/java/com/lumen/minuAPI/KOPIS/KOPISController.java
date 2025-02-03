@@ -29,10 +29,8 @@ public class KOPISController {
         @RequestParam(required = false) String state,
         @RequestParam(required = false) String localnum
     ) {
-        // basic API URL
         String baseUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr";
 
-        // URL 쿼리 파라미터 구성
         StringBuilder urlBuilder = new StringBuilder(baseUrl);
         urlBuilder.append("?service=").append(apiKey);
         urlBuilder.append("&stdate=").append(start);
@@ -40,22 +38,18 @@ public class KOPISController {
         urlBuilder.append("&rows=").append(row);
         urlBuilder.append("&cpage=").append(page);
 
-        // 상태 코드가 있는 경우 추가
         if (state != null && !state.isEmpty()) {
             urlBuilder.append("&prfstate=").append(state);
         }
 
-        // 지역 코드가 있는 경우 추가
         if (localnum != null && !localnum.isEmpty()) {
             urlBuilder.append("&signgucode=").append(localnum);
         }
 
-        // API 호출
         RestTemplate restTemplate = new RestTemplate();
         try {
             String result = restTemplate.getForObject(urlBuilder.toString(), String.class);
             result = kopisJsonTransformer(XML.toJSONObject(result));
-            // result = jsonPrettier(jsonList);
 
             @SuppressWarnings("unchecked")
             Map<String, Object> jsonResponse = new ObjectMapper().readValue(result, Map.class);

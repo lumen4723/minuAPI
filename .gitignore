@@ -39,3 +39,5 @@ out/
 ### Important ###
 application-Credentials.properties
 minuAPI.service
+keystore.p12
+Config/

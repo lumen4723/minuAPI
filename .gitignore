@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### Important ###
-application-Credentials.properties
+application-Credentials.yml
+minuAPI.conf
 minuAPI.service
-keystore.p12
 Config/

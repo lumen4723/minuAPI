@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class KmaController {
-    @Value("${kma.api.key}")
+    @Value("${api-key.kma}")
     private String apiKey;
 
     @GetMapping("/kma")

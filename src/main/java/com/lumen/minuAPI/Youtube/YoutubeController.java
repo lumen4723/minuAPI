@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class YoutubeController {
-    @Value("${google.api.key}")
+    @Value("${api-key.google}")
     private String apiKey;
 
     @GetMapping("/youtube")

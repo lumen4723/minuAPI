@@ -17,7 +17,7 @@ import org.json.XML;
 
 @RestController
 public class KOPISController {
-    @Value("${kopis.api.key}")
+    @Value("${api-key.kopis}")
     private String apiKey;
 
     @GetMapping("/kopis")

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/oauth")
 public class OauthController {
-    @GetMapping("")
+    
+    @GetMapping
     public ResponseEntity<?> Oauth() {
         Map<String, String> result = new HashMap<>();
 
@@ -46,4 +47,5 @@ public class OauthController {
     ) {
         return ResponseEntity.ok(oauth2User);
     }
+
 }

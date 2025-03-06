@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Upbit;
+package com.lumen.minuAPI.OpenAPI.Upbit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;

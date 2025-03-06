@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Youtube;
+package com.lumen.minuAPI.OpenAPI.Youtube;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;

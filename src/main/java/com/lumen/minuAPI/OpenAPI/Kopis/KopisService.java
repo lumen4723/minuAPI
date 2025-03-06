@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Kopis;
+package com.lumen.minuAPI.OpenAPI.Kopis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;

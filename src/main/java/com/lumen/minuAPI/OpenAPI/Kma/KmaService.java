@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Kma;
+package com.lumen.minuAPI.OpenAPI.Kma;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;

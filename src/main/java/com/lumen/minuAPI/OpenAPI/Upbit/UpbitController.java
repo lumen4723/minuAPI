@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Upbit;
+package com.lumen.minuAPI.OpenAPI.Upbit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

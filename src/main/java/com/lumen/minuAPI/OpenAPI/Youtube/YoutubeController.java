@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Youtube;
+package com.lumen.minuAPI.OpenAPI.Youtube;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

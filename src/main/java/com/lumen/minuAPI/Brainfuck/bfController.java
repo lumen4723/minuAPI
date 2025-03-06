@@ -44,7 +44,11 @@ public class bfController {
                     output.append(tape[t_ptr]);
                     break;
                 case ',':
-                    if (inputIndex < input.length()) { tape[t_ptr] = input.charAt(inputIndex++); }
+                    if (
+                        input != null && inputIndex < input.length()
+                    ) {
+                        tape[t_ptr] = input.charAt(inputIndex++);
+                    }
                     else { return "Error: Not enough input values!"; }
                     break;
                 case '(':

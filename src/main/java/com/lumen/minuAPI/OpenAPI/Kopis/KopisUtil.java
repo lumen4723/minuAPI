@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Kopis;
+package com.lumen.minuAPI.OpenAPI.Kopis;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

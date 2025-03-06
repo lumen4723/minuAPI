@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lumen.minuAPI.User.UserMapper">
+
+    <!-- SELECT: 모든 사용자 조회 -->
+    <select id="findAll" resultType="com.lumen.minuAPI.User.UserDTO">
+        SELECT id, name FROM `User`
+    </select>
+
+    <!-- SELECT: ID로 사용자 조회 -->
+    <select id="findById" resultType="com.lumen.minuAPI.User.UserDTO">
+        SELECT * FROM `User` WHERE id = #{id}
+    </select>
+
+    <!-- SELECT: Provider ID로 조회 -->
+    <select id="findByProviderId" resultType="com.lumen.minuAPI.User.UserDTO">
+        SELECT * FROM `User` WHERE providerid = #{providerId} AND provider = #{provider}
+    </select>
+
+    <!-- INSERT: 사용자 추가 -->
+    <insert id="insertUser">
+        INSERT INTO `User` (name, email, providerid, provider, iconpath)
+        VALUES (#{name}, #{email}, #{providerId}, #{provider}, #{iconPath})
+    </insert>
+
+    <!-- UPDATE: 사용자 정보 업데이트 -->
+    <update id="updateUser">
+        UPDATE `User`
+        SET name = #{name}, email = #{email}, iconpath = #{iconPath}
+        WHERE id = #{id}
+    </update>
+
+    <!-- DELETE: 사용자 삭제 -->
+    <delete id="deleteUser">
+        DELETE FROM `User` WHERE id = #{id}
+    </delete>
+
+</mapper>

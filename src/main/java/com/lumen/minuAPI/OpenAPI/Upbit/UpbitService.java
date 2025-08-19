@@ -1,7 +1,6 @@
 package com.lumen.minuAPI.OpenAPI.Upbit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,16 +18,15 @@ public class UpbitService {
         try {
             String result = restTemplate.getForObject(url, String.class);
             result = "{\"result\":" + result + "}";
-
-            Map<String, Object> jsonResponse = new ObjectMapper().readValue(result, Map.class);
-            return new UpbitDTO(jsonResponse);
+            Map<String, Object> resultMap = new ObjectMapper().readValue(result, Map.class);
+            
+            return new UpbitDTO(resultMap);
         }
         catch (Exception e) {
             e.printStackTrace();
             return new UpbitDTO(
-                (Map<String, Object>) new JSONObject()
-                    .put("error", "Failed to fetch data from Upbit API")
-                    .put("message", e.getMessage()));
+                Map.of("error", "Failed to fetch data from Upbit API", "message", e.getMessage())
+            );
         }
     }
 

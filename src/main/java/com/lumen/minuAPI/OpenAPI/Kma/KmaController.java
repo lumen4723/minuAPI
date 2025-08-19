@@ -17,10 +17,10 @@ public class KmaController {
 
     @GetMapping
     public ResponseEntity<KmaDTO> getKmaData(
-            @RequestParam(required = false) String ymd,
-            @RequestParam(defaultValue = "0000") String hm,
-            @RequestParam(defaultValue = "0") int localnum,
-            @RequestParam(defaultValue = "false") boolean help
+        @RequestParam(required = false) String ymd,
+        @RequestParam(defaultValue = "0000") String hm,
+        @RequestParam(defaultValue = "0") int localnum,
+        @RequestParam(defaultValue = "false") boolean help
     ) {
         return ResponseEntity.ok(
             kmaService.fetchKmaData(
@@ -28,5 +28,4 @@ public class KmaController {
             )
         );
     }
-
 } // https://apihub.kma.go.kr/

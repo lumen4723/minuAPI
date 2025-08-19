@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PwGenService {
     
-    public static String generatePassword(
+    public String generatePassword(
         int length, boolean upper, boolean lower, boolean number, boolean special
     ) {
         // length 를 1보다 크게 256보다는 작게 설정
@@ -15,7 +15,7 @@ public class PwGenService {
         String upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerChars = "abcdefghijklmnopqrstuvwxyz";
         String numberChars = "0123456789";
-        String specialChars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+        String specialChars = "!@#$%^*()_+-=[]{}<>?";
         
         String chars = "";
         if (upper) { chars += upperChars; }
@@ -30,5 +30,4 @@ public class PwGenService {
         
         return password.toString();
     }
-
 }

@@ -1,15 +1,17 @@
 package com.lumen.minuAPI.OpenAPI.RNG;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/pwgen")
 public class PwGenController {
     
-    @GetMapping("/pwgen")
+    @Autowired
+    private PwGenService pwGenService;
+
+    @GetMapping
     public ResponseEntity<String> PasswordGenerator(
         @RequestParam(defaultValue = "10") int length,
         @RequestParam(defaultValue = "true") boolean upper,
@@ -18,10 +20,9 @@ public class PwGenController {
         @RequestParam(defaultValue = "false") boolean special
     ) {
         return ResponseEntity.ok(
-            PwGenService.generatePassword(
+            pwGenService.generatePassword(
                 length, upper, lower, number, special
             )
         );
     }
-    
 }

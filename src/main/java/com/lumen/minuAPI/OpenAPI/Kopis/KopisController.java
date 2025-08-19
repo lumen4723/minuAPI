@@ -17,12 +17,12 @@ public class KopisController {
 
     @GetMapping
     public ResponseEntity<KopisDTO> getKopisData(
-            @RequestParam String start,
-            @RequestParam String end,
-            @RequestParam(defaultValue = "10") int row,
-            @RequestParam(defaultValue = "1") int page,
-            @RequestParam(required = false) String state,
-            @RequestParam(required = false) String localnum
+        @RequestParam String start,
+        @RequestParam String end,
+        @RequestParam(defaultValue = "10") int row,
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(required = false) String state,
+        @RequestParam(required = false) String localnum
     ) {
         return ResponseEntity.ok(
             kopisService.fetchKopisData(
@@ -30,5 +30,4 @@ public class KopisController {
             )
         );
     }
-
 }

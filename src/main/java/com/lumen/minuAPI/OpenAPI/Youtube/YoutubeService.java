@@ -1,8 +1,7 @@
 package com.lumen.minuAPI.OpenAPI.Youtube;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,16 +21,15 @@ public class YoutubeService {
 
         try {
             String result = restTemplate.getForObject(url, String.class);
-
-            Map<String, Object> jsonResponse = new ObjectMapper().readValue(result, Map.class);
-            return new YoutubeDTO(jsonResponse);
+            Map<String, Object> resultMap = new ObjectMapper().readValue(result, Map.class);
+            
+            return new YoutubeDTO(resultMap);
         }
         catch (Exception e) {
             e.printStackTrace();
             return new YoutubeDTO(
-                (Map<String, Object>) new JSONObject()
-                    .put("error", "Failed to fetch data from Youtube API")
-                    .put("message", e.getMessage()));
+                Map.of("error", "Failed to fetch data from YouTube API", "message", e.getMessage())
+            );
         }
     }
 

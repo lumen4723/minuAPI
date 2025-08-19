@@ -1,7 +1,6 @@
 package com.lumen.minuAPI.OpenAPI.Kma;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,16 +22,14 @@ public class KmaService {
         try {
             String result = restTemplate.getForObject(url, String.class);
             result = KmaUtil.jsontransform(result, help);
-            Map<String, Object> jsonResponse = new ObjectMapper().readValue(result, Map.class);
+            Map<String, Object> resultMap = new ObjectMapper().readValue(result, Map.class);
 
-            return new KmaDTO(jsonResponse);
+            return new KmaDTO(resultMap);
         }
         catch (Exception e) {
             e.printStackTrace();
             return new KmaDTO(
-                (Map<String, Object>) new JSONObject()
-                    .put("error", "Failed to fetch data from KMA API")
-                    .put("message", e.getMessage())
+                Map.of("error", "Failed to fetch data from KMA API", "message", e.getMessage())
             );
         }
     }
@@ -42,9 +39,9 @@ public class KmaService {
         String hm, int localnum, boolean help
     ) {
         StringBuilder urlBuilder = new StringBuilder(baseUrl)
-                .append("?authKey=").append(apiKey)
-                .append("&stn=").append(localnum)
-                .append("&help=").append(help ? 1 : 0);
+            .append("?authKey=").append(apiKey)
+            .append("&stn=").append(localnum)
+            .append("&help=").append(help ? 1 : 0);
 
         if (ymd != null && !ymd.isEmpty()) {
             urlBuilder.append("&tm=").append(ymd).append(hm);

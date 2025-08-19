@@ -20,5 +20,4 @@ public class YoutubeController {
             youtubeService.fetchYoutubeData(title, row)
         );
     }
-
 }

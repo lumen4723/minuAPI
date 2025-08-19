@@ -1,9 +1,8 @@
 package com.lumen.minuAPI.OpenAPI.Kopis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,20 +22,20 @@ public class KopisService {
         String baseUrl = "http://www.kopis.or.kr/openApi/restful/pblprfr";
         String url = buildUrl(baseUrl, apiKey, start, end, row, page, state, localnum);
 
+        restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
         try {
-            restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-            String xmlResponse = restTemplate.getForObject(url, String.class);
-            JSONObject jsonResponse = XML.toJSONObject(xmlResponse);
-            String transformedJson = KopisUtil.jsontransform(jsonResponse);
-            Map<String, Object> resultMap = new ObjectMapper().readValue(transformedJson, Map.class);
+            String xmlresult = restTemplate.getForObject(url, String.class);
+            String jsonresult = KopisUtil.jsontransform(XML.toJSONObject(xmlresult));
+            Map<String, Object> resultMap = new ObjectMapper().readValue(jsonresult, Map.class);
             
             return new KopisDTO(resultMap);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return new KopisDTO(
-                (Map<String, Object>) new JSONObject()
-                    .put("error", "Failed to fetch data from KOPIS API")
-                    .put("message", e.getMessage()));
+                Map.of("error", "Failed to fetch data from Kopis API", "message", e.getMessage())
+            );
         }
     }
 
@@ -45,11 +44,11 @@ public class KopisService {
         int row, int page, String state, String localnum
     ) {
         StringBuilder urlBuilder = new StringBuilder(baseUrl)
-                .append("?service=").append(apiKey)
-                .append("&stdate=").append(start)
-                .append("&eddate=").append(end)
-                .append("&rows=").append(row)
-                .append("&cpage=").append(page);
+            .append("?service=").append(apiKey)
+            .append("&stdate=").append(start)
+            .append("&eddate=").append(end)
+            .append("&rows=").append(row)
+            .append("&cpage=").append(page);
 
         if (state != null && !state.isEmpty()) {
             urlBuilder.append("&prfstate=").append(state);
@@ -61,5 +60,4 @@ public class KopisService {
 
         return urlBuilder.toString();
     }
-
 }

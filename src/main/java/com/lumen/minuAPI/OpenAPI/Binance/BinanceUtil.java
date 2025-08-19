@@ -1,37 +1,26 @@
 package com.lumen.minuAPI.OpenAPI.Binance;
 
-import java.io.IOException;
 import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BinanceUtil {
     
     private static final String[] KLINE_KEYS = {
-        "openTime",
-        "open",
-        "high",
-        "low",
-        "close",
-        "volume",
-        "closeTime",
-        "quoteAssetVolume",
-        "numberOfTrades",
-        "takerBuyBaseAssetVolume",
-        "takerBuyQuoteAssetVolume",
-        "ignore"
+        "openTime", "open", "high", "low", "close",
+        "volume", "closeTime", "quoteAssetVolume", "numberOfTrades",
+        "takerBuyBaseAssetVolume", "takerBuyQuoteAssetVolume", "ignore"
     };
 
-    @SuppressWarnings("unchecked")
     public static String jsontransform(String json) {
         try {
-            // String을 이중 리스트로 캐스팅
-            List<List<Object>> result = new ObjectMapper().readValue(json, List.class);
-            List<Map<String, Object>> mapped = convertKlinesToMap(result);
-            // 다시 JSON 문자열로 변환
-            return new ObjectMapper().writeValueAsString(mapped);
-        } catch (IOException e) {
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> result = new HashMap<>();
+            result.put("result", convertKlinesToMap(mapper.readValue(json, List.class)));
+            
+            return mapper.writeValueAsString(result);
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "{}";
         }
     }
 

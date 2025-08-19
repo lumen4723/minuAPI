@@ -20,9 +20,9 @@ public class BinanceController {
 
     @GetMapping
     public ResponseEntity<BinanceDTO> getBinanceData(
-            @RequestParam(defaultValue = "BTCUSDT") String symbol,
-            @RequestParam(defaultValue = "15m") String interval,
-            @RequestParam(defaultValue = "10") int limit
+        @RequestParam(defaultValue = "BTCUSDT") String symbol,
+        @RequestParam(defaultValue = "15m") String interval,
+        @RequestParam(defaultValue = "10") int limit
     ) {
         return ResponseEntity.ok(
             binanceService.fetchBinanceData(

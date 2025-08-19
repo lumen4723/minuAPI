@@ -3,9 +3,11 @@ package com.lumen.minuAPI.OpenAPI.Kopis;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
@@ -22,11 +24,12 @@ public class KopisService {
         String url = buildUrl(baseUrl, apiKey, start, end, row, page, state, localnum);
 
         try {
+            restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
             String xmlResponse = restTemplate.getForObject(url, String.class);
             JSONObject jsonResponse = XML.toJSONObject(xmlResponse);
             String transformedJson = KopisUtil.jsontransform(jsonResponse);
-
             Map<String, Object> resultMap = new ObjectMapper().readValue(transformedJson, Map.class);
+            
             return new KopisDTO(resultMap);
         } catch (Exception e) {
             e.printStackTrace();

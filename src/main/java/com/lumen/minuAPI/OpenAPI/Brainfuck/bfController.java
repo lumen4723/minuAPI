@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.Brainfuck;
+package com.lumen.minuAPI.OpenAPI.Brainfuck;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

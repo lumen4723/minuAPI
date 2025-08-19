@@ -1,4 +1,4 @@
-package com.lumen.minuAPI.RNG;
+package com.lumen.minuAPI.OpenAPI.RNG;
 
 import org.springframework.stereotype.Service;
 

@@ -20,4 +20,18 @@ public class HashService {
             return "Error: Algorithm " + algorithm + " not found!";
         }
     }
+
+    public String base64(String input, boolean encode) {
+        try {
+            if (encode) {
+                return java.util.Base64.getEncoder().encodeToString(input.getBytes());
+            }
+            else {
+                byte[] decodedBytes = java.util.Base64.getDecoder().decode(input);
+                return new String(decodedBytes);
+            }
+        } catch (IllegalArgumentException e) {
+            return "Error: Invalid Base64 input!";
+        }
+    }
 }

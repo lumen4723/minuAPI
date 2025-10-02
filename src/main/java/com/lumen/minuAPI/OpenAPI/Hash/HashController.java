@@ -13,53 +13,28 @@ public class HashController {
         this.hashService = hashService;
     }
 
-    @GetMapping("/md5/{input}")
-    public String md5(@PathVariable String input) {
-        return hashService.hash("MD5", input);
+    @GetMapping("/{algorithm}/{input}")
+    public String hash(@PathVariable String algorithm, @PathVariable String input) {
+        // 지원하는 알고리즘 목록
+        String[] supported = {"MD5", "SHA-1", "SHA-224", "SHA-256", "SHA-384", "SHA-512", "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"};
+        boolean isSupported = java.util.Arrays.asList(supported).contains(algorithm.toUpperCase());
+        if (!isSupported) {
+            return "지원하지 않는 해시 알고리즘입니다.";
+        }
+        return hashService.hash(algorithm.toUpperCase(), input);
     }
 
-    @GetMapping("/sha1/{input}")
-    public String sha1(@PathVariable String input) {
-        return hashService.hash("SHA-1", input);
+    @GetMapping("/base64/{action}/{input}")
+    public String base64(@PathVariable String action, @PathVariable String input) {
+        if ("encode".equalsIgnoreCase(action)) {
+            return hashService.base64(input, true);
+        }
+        else if ("decode".equalsIgnoreCase(action)) {
+            return hashService.base64(input, false);
+        }
+        else {
+            return "지원하지 않는 base64 액션입니다. (encode/decode만 가능)";
+        }
     }
 
-    @GetMapping("/sha224/{input}")
-    public String sha224(@PathVariable String input) {
-        return hashService.hash("SHA-224", input);
-    }
-
-    @GetMapping("/sha256/{input}")
-    public String sha256(@PathVariable String input) {
-        return hashService.hash("SHA-256", input);
-    }
-
-    @GetMapping("/sha384/{input}")
-    public String sha384(@PathVariable String input) {
-        return hashService.hash("SHA-384", input);
-    }
-
-    @GetMapping("/sha512/{input}")
-    public String sha512(@PathVariable String input) {
-        return hashService.hash("SHA-512", input);
-    }
-
-    @GetMapping("/sha3-224/{input}")
-    public String sha3_224(@PathVariable String input) {
-        return hashService.hash("SHA3-224", input);
-    }
-
-    @GetMapping("/sha3-256/{input}")
-    public String sha3_256(@PathVariable String input) {
-        return hashService.hash("SHA3-256", input);
-    }
-
-    @GetMapping("/sha3-384/{input}")
-    public String sha3_384(@PathVariable String input) {
-        return hashService.hash("SHA3-384", input);
-    }
-
-    @GetMapping("/sha3-512/{input}")
-    public String sha3_512(@PathVariable String input) {
-        return hashService.hash("SHA3-512", input);
-    }
 }

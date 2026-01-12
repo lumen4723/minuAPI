@@ -11,6 +11,7 @@ public class BinanceUtil {
         "takerBuyBaseAssetVolume", "takerBuyQuoteAssetVolume", "ignore"
     };
 
+    @SuppressWarnings("unchecked")
     public static String jsontransform(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper();

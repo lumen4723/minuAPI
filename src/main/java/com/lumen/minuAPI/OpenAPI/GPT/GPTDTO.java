@@ -1,4 +1,6 @@
-package com.lumen.minuAPI.Board;
+package com.lumen.minuAPI.OpenAPI.GPT;
+
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDTO {
-    private String data;
+public class GPTDTO {
+    private Map<String, Object> data;
 }

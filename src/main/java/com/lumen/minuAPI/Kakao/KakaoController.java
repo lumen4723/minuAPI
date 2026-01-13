@@ -51,25 +51,20 @@ public class KakaoController {
             .filter(obj -> obj instanceof String)
             .map(obj -> (String) obj)
             .orElse(null);
-
-        System.out.println("Kakao GPT 요청 utterance: " + utterance);
         
         // !gpt 접두어 제거, 만약 없다면 응답하지 않음
         if (utterance == null || !utterance.startsWith("!gpt ")) { return null; }
         
         String userPrompt = utterance.substring(5).trim();
 
-        System.out.println("Kakao GPT 요청: " + userPrompt);
-
-        // GPT 응답 가져오기
-        String gptResponse = java.util.Optional.ofNullable(gptController.getGPTData(userPrompt, "gpt-4-turbo", 500))
+        // 콜백 URL이 없으면 동기 처리 (기존 방식, 타임아웃 위험)
+        String gptResponse = java.util.Optional.ofNullable(
+            gptController.getGPTData(userPrompt, "gpt-3.5-turbo", 300))
             .map(res -> res.getBody())
             .map(dto -> dto.getData())
             .map(data -> data.get("content"))
             .map(Object::toString)
             .orElse("GPT 응답을 가져올 수 없습니다.");
-
-        System.out.println("Kakao GPT 응답: " + gptResponse);
 
         return textResponse(gptResponse);
     }
